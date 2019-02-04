@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Persons/person'
 // import Radium,{StyleRoot} from 'radium'
 
@@ -53,20 +53,21 @@ class App extends Component {
     })
   }
   render() {
-    const styling = {
-      backgroundColor:'green',
-      color:'white',
-      font:'inherit',
-      padding:'8px',
-      cursor:'pointer',
-      border: '1px solid blue',
-      // ':hover':{
-      //   backgroundColor:'red',
-      //   color:'white'
-      // }
-    };
+    // const styling = {
+    //   backgroundColor:'green',
+    //   color:'white',
+    //   font:'inherit',
+    //   padding:'8px',
+    //   cursor:'pointer',
+    //   border: '1px solid blue',
+    //   // ':hover':{
+    //   //   backgroundColor:'red',
+    //   //   color:'white'
+    //   // }
+    // };
 
     let persons = null;
+    let buttonClass = '';
 
     if(this.state.showPersons){
       persons =(
@@ -83,30 +84,32 @@ class App extends Component {
          })}
         </div>
       );
+
+      buttonClass = classes.Red;
     }
 
-    styling.color = 'red';
+    // styling.color = 'red';
     // styling[':hover'] = {
     //   backgroundColor:'salmon',
     //   color:'white'
     // }
-    const classes = [];
+    const assignedClass = [];
     if(this.state.persons.length <=2)
     {
-      classes.push('red');
+      assignedClass.push(classes.red);
     }
     if(this.state.persons.length<=1)
     {
-      classes.push('bold');
+      assignedClass.push(classes.bold);
     }
 
     return (
       // <StyleRoot>
-      <div className="App">
+      <div className={classes.App}>
           <h1>Hello I am Sambhav</h1>
-          <p className={classes.join(' ')}>I know how to work</p>
+          <p className={assignedClass.join(' ')}>I know how to work</p>
           <button
-          style={styling}
+          className={buttonClass}
           // onClick={this.changeNameHandler.bind(this,'Kumar Sambhav')
           onClick = {this.togglePersonHandler}
           >
