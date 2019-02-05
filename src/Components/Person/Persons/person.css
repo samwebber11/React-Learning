@@ -11,3 +11,9 @@
     background-color: red;
     color: #ccc;
 } */
+
+@media (min-width: 500px) {
+    .person {
+        width:450px;
+    }
+}
