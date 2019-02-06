@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
+import PropTypes from 'prop-types'
 // import Person from '../Components/Person/Persons/person'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import Persons from '../Components/Person/person'
@@ -8,6 +9,7 @@ import Aux from '../hoc/Aux'
 import Wrapper from '../hoc/withClass'
 // import Radium,{StyleRoot} from 'radium'
 
+export const AuthContext = React.createContext(false);
 class App extends Component {
 
   constructor(props)
@@ -21,7 +23,8 @@ class App extends Component {
       ],
       otherState: "Hi i am also there",
       showPersons: false,
-      toggleState:0
+      toggleState:0,
+      authenticated:false,
     }
     console.log("App.js is in constructor");
   }
@@ -94,6 +97,13 @@ class App extends Component {
       }
     })
   }
+
+  authenticationUser = () => {
+    console.log("Reached here");
+    this.setState({
+      authenticated:true
+    })
+  }
   render() {
     // const styling = {
     //   backgroundColor:'green',
@@ -117,6 +127,7 @@ class App extends Component {
           persons = {this.state.persons}
           clicked = {this.deleteNamehandler}
           changed = {this.changeEventHandler}
+
           />
         </div>
       );
@@ -137,12 +148,15 @@ class App extends Component {
           show = {this.state.showPersons}
           persons = {this.state.persons}
           toggle = {this.togglePersonHandler}
+          authentication = {this.authenticationUser}
           />
-          {persons}
+          <AuthContext.Provider value ={this.state.authenticated}>{persons}
+          </AuthContext.Provider>
       </Aux>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Does this work fine?'));
   }
+
 }
 
 export default Wrapper(App,classes.App);

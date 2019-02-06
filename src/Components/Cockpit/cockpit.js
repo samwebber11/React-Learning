@@ -1,5 +1,7 @@
 import React,{Component} from 'react'
 import classes  from './cockpit.css'
+import Aux from '../../hoc/Aux'
+import Wrapper from '../../hoc/withClass'
 
 class Cockpit extends Component{
 
@@ -44,7 +46,7 @@ class Cockpit extends Component{
         assignClass.push(classes.bold);
     }
     return (
-    <div className = {classes.Cockpit}>
+    <Aux>
     <h1>{this.props.showTitle}</h1>
     <p className={assignClass.join(' ')} >
     I know how to work</p>
@@ -54,9 +56,10 @@ class Cockpit extends Component{
     onClick = {this.props.toggle}>
     Switch some Name
     </button>
-    </div>
+    <button onClick = {this.props.authentication}>Log In</button>
+    </Aux>
     );
 }
 }
 
-export default Cockpit;
+export default Wrapper(Cockpit,classes.Cockpit);
